@@ -1,10 +1,10 @@
 import java.util.Objects;
 
 public class Hogwarts {
-    private final String name;
-    private String surname;
-    private int magic;
-    private int transgression;
+    protected final String name;
+    protected final String surname;
+    protected final int magic;
+    protected final int transgression;
 
     public Hogwarts(String name, String surname, int magic, int transgression) {
         this.name = name;
