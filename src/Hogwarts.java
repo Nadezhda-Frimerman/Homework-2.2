@@ -1,20 +1,14 @@
 import java.util.Objects;
 
 public class Hogwarts {
-    protected final String name;
-    protected final String surname;
-    protected final int magic;
-    protected final int transgression;
+    private String name;
+    private int magic;
+    private int transgression;
 
-    public Hogwarts(String name, String surname, int magic, int transgression) {
+    public Hogwarts(String name, int magic, int transgression) {
         this.name = name;
-        this.surname = surname;
         this.magic = magic;
         this.transgression = transgression;
-    }
-
-    public String getSurname() {
-        return surname;
     }
 
     public String getName() {
@@ -29,21 +23,24 @@ public class Hogwarts {
         return magic;
     }
     public String toString() {
-        return getName()+" "+getSurname()+" волшебство - "+getMagic()+" трансгрессия - "+getTransgression();
+        return getName()+" волшебство - "+getMagic()+" трансгрессия - "+getTransgression();
     }
     public int hashCode(){
-        return Objects.hash (name,surname,magic,transgression);
+        return Objects.hash (name,magic,transgression);
+    }
+    public int magicPower(Hogwarts  student){
+        return student.getMagic()+student.getTransgression();
     }
 
-    public void compare(Hogwarts a, Hogwarts b) {
-        if (a.getMagic()+a.getTransgression()==b.getMagic()+b.getTransgression()) {
-            System.out.printf("%s %s и %s %s обладают одинаковой мощностью магии.", a.getName(), a.getSurname(), b.getName(), b.getSurname());
+    public void compareMagicPower (Hogwarts a) {
+        if (magicPower(this)<magicPower(a)) {
+            System.out.printf("%s обладает бОльшей мощностью магии, чем %s.%n", a.getName(), this.getName());
         }
-        if (a.getMagic()+a.getTransgression()>b.getMagic()+b.getTransgression()){
-            System.out.printf("%s %s обладает бОльшей мощностью магии, чем %s %s", a.getName(), a.getSurname(), b.getName(), b.getSurname());
+        else if (magicPower(this)>magicPower(a)){
+            System.out.printf("%s обладает бОльшей мощностью магии, чем %s.%n", this.getName(), a.getName());
         }
         else {
-            System.out.printf("%s %s обладает бОльшей мощностью магии, чем %s %s", b.getName(), b.getSurname(), a.getName(), a.getSurname());
+            System.out.printf("%s и %s обладают одинаковой мощностью магии.%n", this.getName(), a.getName());
         }
 
 

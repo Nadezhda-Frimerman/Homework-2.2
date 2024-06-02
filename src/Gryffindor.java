@@ -5,9 +5,9 @@ public class Gryffindor extends Hogwarts {
     private int honor;
     private int courage;
 
-    public Gryffindor(String name, String surname, int magic,
-                      int transgression, int nobility, int honor,int courage) {
-        super(name, surname, magic, transgression);
+    public Gryffindor(String name, int magic, int transgression,
+                      int nobility, int honor,int courage) {
+        super(name, magic, transgression);
         this.nobility=nobility;
         this.honor=honor;
         this.courage=courage;
@@ -25,24 +25,25 @@ public class Gryffindor extends Hogwarts {
         return nobility;
     }
     public String toString() {
-        return getName()+" "+getSurname()+" волшебство - "+getMagic()+" трансгрессия - "+getTransgression()
-                +" благородство - "+getNobility()+" честь - "+getHonor()+" храбрость - "+getCourage();
+        return getName()+" "+" волшебство - "+getMagic()+", трансгрессия - "+getTransgression()
+                +", благородство - "+getNobility()+", честь - "+getHonor()+", храбрость - "+getCourage();
     }
     public int hashCode(){
-        return Objects.hash (name,surname,magic,transgression,nobility,honor,courage);
+        return Objects.hash (getName(),getMagic(), getTransgression(),nobility,honor,courage);
+    }
+    public int sumProperties(){
+        return this.nobility +this.honor+this.courage;
     }
 
-    public void compare(Gryffindor a, Gryffindor b) {
-        if (a.getMagic()+a.getTransgression()+a.getNobility()+a.getHonor()+a.getCourage()
-                ==b.getMagic()+b.getTransgression()+b.getNobility()+b.getHonor()+b.getCourage()) {
-            System.out.printf("%s %s и %s %s обладают одинаковой мощностью магии.", a.getName(), a.getSurname(), b.getName(), b.getSurname());
+    public void compareByProperties(Gryffindor a) {
+        if (a.sumProperties() > this.sumProperties()) {
+            System.out.printf("%s лучший Гриффиндорец, чем %s.%n", a.getName(), this.getName());
         }
-        if (a.getMagic()+a.getTransgression()+a.getNobility()+a.getHonor()+a.getCourage()
-                >b.getMagic()+b.getTransgression()+b.getNobility()+b.getHonor()+b.getCourage()){
-            System.out.printf("%s %s лучший Гриффиндорец, чем %s %s", a.getName(), a.getSurname(), b.getName(), b.getSurname());
+        else if (a.sumProperties() < this.sumProperties()){
+            System.out.printf("%s лучший Гриффиндорец, чем %s.%n", this.getName(), a.getName());
         }
         else {
-            System.out.printf("%s %s лучший Гриффиндорец, чем %s %s", b.getName(), b.getSurname(), a.getName(), a.getSurname());
+            System.out.printf("%s и %s одинако хорошие Гриффиндорцы.%n", this.getName(), a.getName());
         }
     }
 
